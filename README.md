@@ -5,7 +5,7 @@
 
 **Activate any version of Windows and Office, forever**
 
-![slmgr](https://github.com/11notes/docker-kms/blob/main/slmgr.png?raw=true)
+![slmgr](https://github.com/11notes/docker-kms-gui/blob/main/GUI.png?raw=true)
 
 # SYNOPSIS 📖
 **What can I do with this?** This image will run a web GUI for your [11notes/kms](https://hub.docker.com/r/11notes/kms) server.
