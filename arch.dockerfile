@@ -53,14 +53,15 @@
   # :: install application
     RUN set -ex; \
       apk --no-cache --update add \
-        python3=3.12.8-r1 \
-        py3-pip ; \
-      pip3 install --upgrade pip --break-system-packages;
+        python3=3.12.8-r1; \
+      apk --no-cache --update --virtual .build add \
+        py3-pip;
 
     RUN set -ex; \
       mkdir -p ${APP_ROOT}/var; \
       cd /opt/py-kms-gui; \
-      pip3 install --no-cache-dir -r /opt/py-kms-gui/requirements.txt --break-system-packages;
+      pip3 install --no-cache-dir -r /opt/py-kms-gui/requirements.txt --break-system-packages; \
+      apk del --no-network .build;
 
   # :: copy filesystem changes and set correct permissions
     COPY ./rootfs /
