@@ -10,6 +10,34 @@
 # SYNOPSIS 📖
 **What can I do with this?** This image will run a web GUI for your [11notes/kms](https://hub.docker.com/r/11notes/kms) server.
 
+# COMPOSE ✂️
+```yaml
+name: "kms"
+services:
+  kms:
+    image: "11notes/kms:latest"
+    container_name: "kms"
+    environment:
+      TZ: Europe/Zurich
+    volumes:
+      - "var:/kms/var"
+    ports:
+      - "1688:1688/tcp"
+    restart: always
+  kms-gui:
+    image: "11notes/kms-gui:646f476"
+    container_name: "kms-gui"
+    environment:
+      TZ: Europe/Zurich
+    volumes:
+      - "var:/kms/var"
+    ports:
+      - "8080:8080/tcp"
+    restart: always
+volumes:
+  var:
+```
+
 # ENVIRONMENT 📝
 | Parameter | Value | Default |
 | --- | --- | --- |
