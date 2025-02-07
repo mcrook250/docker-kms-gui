@@ -48,7 +48,7 @@ volumes:
 * [11notes/kms-gui](https://github.com/11notes/docker-kms-gui)
 
 # PARENT IMAGE 🏛️
-* [11notes/alpine:stable](https://hub.docker.com/r/11notes/alpine)
+* [11notes/kms:646f476](https://hub.docker.com/r/11notes/kms)
 
 # BUILT WITH 🧰
 * [py-kms](https://github.com/Py-KMS-Organization/py-kms)

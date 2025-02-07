@@ -6,5 +6,5 @@
   "root":"/kms",
   
   "stable":"646f476",
-  "parent":"11notes/alpine:stable"
+  "parent":"11notes/kms:646f476"
 }
