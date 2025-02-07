@@ -1,6 +1,8 @@
 # :: Util
   FROM alpine AS util
 
+  ARG NO_CACHE
+
   RUN set -ex; \
     apk --no-cache --update add \
       git; \
@@ -41,11 +43,14 @@
     ENV APP_ROOT=${APP_ROOT}
 
     ENV PYKMS_SQLITE_DB_PATH=/kms/var/kms.db
+    ENV PYKMS_LICENSE_PATH=/opt/py-kms-gui/LICENSE
+    ENV PYKMS_VERSION_PATH=/opt/py-kms-gui
     ENV PORT=8080
 
   # :: multi-stage
     COPY --from=util /docker-util/src/ /usr/local/bin
     COPY --from=build /opt/py-kms-gui/ /opt/py-kms-gui
+    COPY ./LICENSE /opt/py-kms-gui
 
   # :: Run
   USER root
@@ -74,7 +79,7 @@
   VOLUME ["${APP_ROOT}/var"]
 
 # :: Monitor
-  HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT} || exit 1
+  HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT}/livez || exit 1
 
 # :: Start
   USER docker
