@@ -42,7 +42,7 @@
 
     ENV PYKMS_SQLITE_DB_PATH=/kms/var/kms.db
     ENV PYKMS_LICENSE_PATH=/opt/py-kms-gui/LICENSE
-    ENV PYKMS_VERSION_PATH=/opt/py-kms-gui
+    ENV PYKMS_VERSION_PATH=/opt/py-kms-gui/VERSION
     ENV PORT=8080
 
   # :: multi-stage
@@ -63,6 +63,8 @@
     RUN set -ex; \
       mkdir -p ${APP_ROOT}/var; \
       cd /opt/py-kms-gui; \
+      echo "${APP_VERSION}" > VERSION; \
+      echo "master" >> VERSION; \
       pip3 install --no-cache-dir -r /opt/py-kms-gui/requirements.txt --break-system-packages; \
       apk del --no-network .build;
 
