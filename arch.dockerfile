@@ -45,7 +45,8 @@ ARG APP_VERSION=stable
     RUN set -ex; \
       chmod +x -R /usr/local/bin; \
       chown -R 1000:1000 \
-        ${APP_ROOT};
+        ${APP_ROOT} \
+        /opt/py-kms;
 
 # :: Monitor
   HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT}/livez || exit 1
