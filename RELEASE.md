@@ -1,2 +1,2 @@
 ### 🪄 Features
-* switch to new github workflow and build process
+* new base layer 11notes/kms:${APP_VERSION}
