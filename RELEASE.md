@@ -1,2 +1,2 @@
 ### 🪄 Features
-* remove truncation from clients.html
+* add DEBUG option via enivornment variable DEBUG

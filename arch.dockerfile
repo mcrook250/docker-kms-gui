@@ -20,6 +20,7 @@ ARG APP_VERSION=stable
     ENV PYKMS_LICENSE_PATH=/opt/py-kms/LICENSE
     ENV PYKMS_VERSION_PATH=/opt/py-kms/VERSION
     ENV PORT=8080
+    ENV LOG_LEVEL=INFO
 
   # :: multi-stage
     COPY ./LICENSE /opt/py-kms
