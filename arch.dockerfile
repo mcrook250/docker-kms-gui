@@ -1,11 +1,9 @@
 # :: Util
-  FROM alpine AS util
+  FROM alpine/git AS util
 
   ARG NO_CACHE
 
   RUN set -ex; \
-    apk --no-cache --update add \
-      git; \
     git clone https://github.com/11notes/docker-util.git;
 
 # :: Build / redis
@@ -48,7 +46,7 @@
     ENV PORT=8080
 
   # :: multi-stage
-    COPY --from=util /docker-util/src/ /usr/local/bin
+    COPY --from=util /git/docker-util/src/ /usr/local/bin
     COPY --from=build /opt/py-kms-gui/ /opt/py-kms-gui
     COPY ./LICENSE /opt/py-kms-gui
 
