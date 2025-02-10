@@ -11,7 +11,7 @@ services:
       - "1688:1688/tcp"
     restart: always
   kms-gui:
-    image: "11notes/kms-gui:646f476"
+    image: "11notes/kms-gui:465f4d1"
     container_name: "kms-gui"
     environment:
       TZ: Europe/Zurich

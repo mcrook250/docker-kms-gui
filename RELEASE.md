@@ -1,2 +1,2 @@
-### 🪄 Features
-* add DEBUG option via enivornment variable DEBUG
+### 🚀 Updates
+* switch to next branch of kms base image
