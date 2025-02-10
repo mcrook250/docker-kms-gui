@@ -60,9 +60,9 @@ jobs:
           echo "${{ toJSON(github.event.inputs) }}"
 
       - name: github / disable release
-        if: ${{ inputs.release != null && inputs.release == false }}
+        if: ${{ inputs.release != null }}
         run: |
-          echo "RELEASE=false" >> $GITHUB_ENV
+          echo "RELEASE=${{ inputs.release }}" >> $GITHUB_ENV
 
       - name: docker / login to hub
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567
@@ -176,3 +176,10 @@ jobs:
           provider: dockerhub
           short_description: ${{ env.json_description }}
           readme_file: 'README.md'
+
+      - name: github / dispatch workflow
+        if: ${{ env.json_dispatch_workflow != null }}
+        uses: benc-uk/workflow-dispatch@e2e5e9a103e331dad343f381a29e654aea3cf8fc
+        with:
+          workflow: ${{ env.json_dispatch_workflow }}
+          token: "${{ secrets.REPOSITORY_TOKEN }}"
