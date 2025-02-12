@@ -50,7 +50,7 @@ ARG APP_VERSION_SUFFIX=""
     COPY ./rootfs /
     RUN set -ex; \
       chmod +x -R /usr/local/bin; \
-      chown -R ${APP_UID}:${APP_GID}} \
+      chown -R ${APP_UID}:${APP_GID} \
         ${APP_ROOT} \
         /opt/py-kms;
 
