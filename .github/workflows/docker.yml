@@ -120,7 +120,9 @@ jobs:
             APP_ROOT=${{ env.json_root }}
             APP_UID=${{ env.IMAGE_UID }}
             APP_GID=${{ env.IMAGE_GID }}
-            NO_CACHE=$(date +%s)
+            APP_VERSION_PREFIX=${{ env.IMAGE_SEMVER_PREFIX }}
+            APP_VERSION_SUFFIX=${{ env.IMAGE_SEMVER_SUFFIX }}
+            APP_NO_CACHE=$(date +%s)
           tags: |
             ${{ env.IMAGE }}:${{ env.IMAGE_SEMVER_PREFIX }}grype${{ env.IMAGE_SEMVER_SUFFIX }}
 
@@ -167,7 +169,9 @@ jobs:
             APP_ROOT=${{ env.json_root }}
             APP_UID=${{ env.IMAGE_UID }}
             APP_GID=${{ env.IMAGE_GID }}
-            NO_CACHE=$(date +%s)
+            APP_VERSION_PREFIX=${{ env.IMAGE_SEMVER_PREFIX }}
+            APP_VERSION_SUFFIX=${{ env.IMAGE_SEMVER_SUFFIX }}
+            APP_NO_CACHE=$(date +%s)
           tags: |
             ${{ env.IMAGE_TAGS }}
 

@@ -1,7 +1,9 @@
 ARG APP_VERSION=stable
+ARG APP_VERSION_PREFIX=""
+ARG APP_VERSION_SUFFIX=""
 
 # :: Header
-  FROM 11notes/kms:${APP_VERSION}
+  FROM 11notes/kms:${APP_VERSION_PREFIX}${APP_VERSION}${APP_VERSION_SUFFIX}
 
   # :: arguments
     ARG TARGETARCH
@@ -48,13 +50,9 @@ ARG APP_VERSION=stable
     COPY ./rootfs /
     RUN set -ex; \
       chmod +x -R /usr/local/bin; \
-      chown -R 1000:1000 \
+      chown -R ${APP_UID}:${APP_GID}} \
         ${APP_ROOT} \
         /opt/py-kms;
-
-  # :: support unraid
-    RUN set -ex; \
-      eleven unraid
 
 # :: Monitor
   HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT}/livez || exit 1
