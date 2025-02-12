@@ -46,7 +46,6 @@ ARG APP_VERSION=stable
     RUN set -ex; \
       chmod +x -R /usr/local/bin; \
       chown -R 1000:1000 \
-        /usr/local/bin \
         ${APP_ROOT} \
         /opt/py-kms;
 

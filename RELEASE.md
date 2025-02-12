@@ -1,2 +1,2 @@
-### 🚀 Updates
-* switch to next branch of kms base image
+### 🪄 Features
+* new .json format

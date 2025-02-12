@@ -1,11 +1,18 @@
 {
   "image":"11notes/kms-gui",
-  "description":"Activate any version of Windows and Office, forever",
   "name":"kms-gui",
-  "version":"465f4d1",
   "root":"/kms",
   
-  "stable":"465f4d1",
-  "latest":"465f4d1",
-  "parent":"11notes/kms:465f4d1"
+  "semver":{
+    "version":"465f4d1",
+    "stable":"465f4d1",
+    "latest":"465f4d1"
+  },
+
+  "readme":{
+    "description":"Activate any version of Windows and Office, forever",
+    "parent":{
+      "image":"11notes/kms:465f4d1"
+    }
+  }
 }
