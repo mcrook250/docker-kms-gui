@@ -7,6 +7,16 @@
 
 ![GUI](https://github.com/11notes/docker-kms-gui/blob/master/img/GUI.png?raw=true)
 
+# MAIN TAGS 🏷️
+These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
+
+* [465f4d1](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1)
+* [stable](https://hub.docker.com/r/11notes/kms-gui/tags?name=stable)
+* [latest](https://hub.docker.com/r/11notes/kms-gui/tags?name=latest)
+* [465f4d1-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1-unraid)
+* [stable-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=stable-unraid)
+* [latest-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=latest-unraid)
+
 # SYNOPSIS 📖
 **What can I do with this?** This image will run a web GUI for your [11notes/kms](https://hub.docker.com/r/11notes/kms) server.
 
