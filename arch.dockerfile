@@ -9,6 +9,8 @@ ARG APP_VERSION=stable
     ARG APP_NAME
     ARG APP_VERSION
     ARG APP_ROOT
+    ARG APP_UID
+    ARG APP_GID
 
   # :: environment
     ENV APP_IMAGE=${APP_IMAGE}
@@ -27,6 +29,7 @@ ARG APP_VERSION=stable
 
   # :: Run
   USER root
+  RUN eleven printenv;
 
   # :: install application
     RUN set -ex; \
@@ -48,6 +51,10 @@ ARG APP_VERSION=stable
       chown -R 1000:1000 \
         ${APP_ROOT} \
         /opt/py-kms;
+
+  # :: support unraid
+    RUN set -ex; \
+      eleven unraid
 
 # :: Monitor
   HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT}/livez || exit 1
