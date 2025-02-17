@@ -2,6 +2,13 @@ ARG APP_VERSION=stable
 ARG APP_VERSION_PREFIX=""
 ARG APP_VERSION_SUFFIX=""
 
+# :: Build / templates
+  FROM alpine/git AS templates
+  RUN set -ex; \
+    git clone https://github.com/CustomIcon/pykms-frontend.git; \
+    cd /git/pykms-frontend; \
+    git reset --hard 9e789a5;
+
 # :: Header
   FROM 11notes/kms:${APP_VERSION_PREFIX}${APP_VERSION}${APP_VERSION_SUFFIX}
 
@@ -19,6 +26,8 @@ ARG APP_VERSION_SUFFIX=""
     ENV APP_NAME=${APP_NAME}
     ENV APP_VERSION=${APP_VERSION}
     ENV APP_ROOT=${APP_ROOT}
+
+    ENV KMS_GUI_STYLE="custom-icon"
 
     ENV PYKMS_SQLITE_DB_PATH=/kms/var/kms.db
     ENV PYKMS_LICENSE_PATH=/opt/py-kms/LICENSE
@@ -46,8 +55,19 @@ ARG APP_VERSION_SUFFIX=""
       pip3 install --no-cache-dir -r /opt/py-kms/requirements.gui.txt --break-system-packages; \
       apk del --no-network .build;
 
-  # :: copy filesystem changes and set correct permissions
-    COPY ./rootfs /
+  # :: copy filesystem changes
+    COPY ./rootfs /      
+
+  # :: add multi template option
+    RUN set -ex; \
+      mkdir -p ${APP_ROOT}/.default/templates/py-kms; \
+      mkdir -p ${APP_ROOT}/.default/templates/custom-icon; \
+      cp -R /opt/py-kms/templates/* ${APP_ROOT}/.default/templates/py-kms; \
+      rm -rf /opt/py-kms/templates;
+    
+    COPY --from=templates /git/pykms-frontend/templates/ ${APP_ROOT}/.default/templates/custom-icon
+
+  # :: set correct permissions
     RUN set -ex; \
       chmod +x -R /usr/local/bin; \
       chown -R ${APP_UID}:${APP_GID} \
