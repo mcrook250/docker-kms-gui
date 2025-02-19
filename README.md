@@ -64,7 +64,7 @@ volumes:
 | --- | --- | --- |
 | `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | |
 | `DEBUG` | Will activate debug option for container image and app (if available) | |
-| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon, py-kms |
+| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon |
 
 # SOURCE 💾
 * [11notes/kms-gui](https://github.com/11notes/docker-kms-gui)
