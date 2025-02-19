@@ -54,6 +54,7 @@ th {
         <tr>
             <th>Client ID</th>
             <th>Machine Name</th>
+            <th>Machine IP</th>
             <th>Application ID</th>
             <th><abbr title="Stock Keeping Unit">SKU</abbr> ID</th>
             <th>License Status</th>
@@ -67,6 +68,7 @@ th {
         <tr>
             <th><pre class="clientMachineId">{{ client.clientMachineId }}</pre></th>
             <td class="machineName">{{ client.machineName }}</td>
+            <td>{{ client.machineIp }}</td>
             <td>{{ client.applicationId }}</td>
             <td>{{ client.skuId }}</td>
             <td>{{ client.licenseStatus }}</td>
