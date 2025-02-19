@@ -7,7 +7,7 @@ ${{ content_compose }}
 ${{ content_defaults }}
 
 ${{ content_environment }}
-| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon, py-kms |
+| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon |
 
 ${{ content_source }}
 
