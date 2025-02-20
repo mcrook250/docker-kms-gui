@@ -1,4 +1,5 @@
 {
   "readme": "true",
-  "release": "true"
+  "release": "true",
+  "run-name": "docker"
 }
