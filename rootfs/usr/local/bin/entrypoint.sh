@@ -9,7 +9,7 @@
     # apply correct style
     rm -rf /opt/py-kms/templates
     rm -rf /opt/py-kms/static
-    TEMPLATE_DIR=${APP_ROOT}/.default/styles
+    TEMPLATE_DIR=${APP_ROOT}/styles
     case ${KMS_GUI_STYLE} in
       py-kms)
         ln -s ${TEMPLATE_DIR}/py-kms/templates /opt/py-kms/templates
@@ -19,7 +19,7 @@
       *)
         ln -s ${TEMPLATE_DIR}/custom-icon/templates /opt/py-kms/templates
         ln -s ${TEMPLATE_DIR}/custom-icon/static /opt/py-kms/static
-        eleven log info "using default GUI style"
+        eleven log info "using custom-icon (default) GUI style"
       ;;
     esac
 
