@@ -5,9 +5,9 @@ ARG APP_VERSION_SUFFIX=""
 # :: Build / templates
   FROM alpine/git AS templates
   RUN set -ex; \
-    git clone https://github.com/CustomIcon/pykms-frontend.git; \
+    git clone https://github.com/11notes/pykms-frontend.git; \
     cd /git/pykms-frontend; \
-    git reset --hard 9e789a5;
+    git reset --hard 33777b8;
 
 # :: Header
   FROM 11notes/kms:${APP_VERSION_PREFIX}${APP_VERSION}${APP_VERSION_SUFFIX}
@@ -60,12 +60,15 @@ ARG APP_VERSION_SUFFIX=""
 
   # :: add multi template option
     RUN set -ex; \
-      mkdir -p ${APP_ROOT}/.default/templates/py-kms; \
-      mkdir -p ${APP_ROOT}/.default/templates/custom-icon; \
-      cp -R /opt/py-kms/templates/* ${APP_ROOT}/.default/templates/py-kms; \
-      rm -rf /opt/py-kms/templates;
+      mkdir -p ${APP_ROOT}/.default/styles/py-kms/templates; \
+      mkdir -p ${APP_ROOT}/.default/styles/custom-icon/templates; \
+      cp -R /opt/py-kms/templates/* ${APP_ROOT}/.default/styles/py-kms/templates; \
+      cp -R /opt/py-kms/static/* ${APP_ROOT}/.default/styles/py-kms/static; \
+      rm -rf /opt/py-kms/templates; \
+      rm -rf /opt/py-kms/static;
     
-    COPY --from=templates /git/pykms-frontend/templates/ ${APP_ROOT}/.default/templates/custom-icon
+    COPY --from=templates /git/pykms-frontend/templates ${APP_ROOT}/.default/styles/custom-icon/templates
+    COPY --from=templates /git/pykms-frontend/static ${APP_ROOT}/.default/styles/custom-icon/static
 
   # :: set correct permissions
     RUN set -ex; \
