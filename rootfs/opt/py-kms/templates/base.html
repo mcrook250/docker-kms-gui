@@ -36,18 +36,6 @@
         {% endif %}
     </div>
 
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>
-                <strong>py-kms</strong> is online since <span class="convert_timestamp">{{ start_time }}</span>.
-                This instance was accessed {{ get_serve_count() }} times. View this softwares license <a href="/license">here</a>.
-                {% if version_info %}
-                <br>This instance is running version "{{ version_info['hash'] }}" from branch "{{ version_info['branch'] }}" of py-kms.
-                {% endif %}
-            </p>
-        </div>
-    </footer>
-
     <script>
         for(let element of document.getElementsByClassName('convert_timestamp')) {
             element.innerText = new Date(element.innerText).toLocaleString();
