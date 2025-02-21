@@ -4,6 +4,7 @@ ARG APP_VERSION_SUFFIX=""
 
 # :: Build / styles
   FROM alpine/git AS styles
+  ARG APP_NO_CACHE
   RUN set -ex; \
     git clone https://github.com/11notes/pykms-frontend.git; \
     cd /git/pykms-frontend; \
