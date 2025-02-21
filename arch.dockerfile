@@ -8,7 +8,7 @@ ARG APP_VERSION_SUFFIX=""
   RUN set -ex; \
     git clone https://github.com/11notes/pykms-frontend.git; \
     cd /git/pykms-frontend; \
-    git reset --hard 9785b65;
+    git reset --hard 103935b;
 
 # :: Header
   FROM 11notes/kms:${APP_VERSION_PREFIX}${APP_VERSION}${APP_VERSION_SUFFIX}
