@@ -1,6 +1,6 @@
 ARG APP_VERSION=stable
-ARG APP_VERSION_PREFIX=""
-ARG APP_VERSION_SUFFIX=""
+ARG APP_PREFIX=""
+ARG APP_SUFFIX=""
 
 # :: Build / styles
   FROM alpine/git AS styles
@@ -10,7 +10,7 @@ ARG APP_VERSION_SUFFIX=""
     cd /git/pykms-frontend;
 
 # :: Header
-  FROM 11notes/kms:${APP_VERSION_PREFIX}${APP_VERSION}${APP_VERSION_SUFFIX}
+  FROM 11notes/kms:${APP_PREFIX}${APP_VERSION}${APP_SUFFIX}
 
   # :: arguments
     ARG TARGETARCH
