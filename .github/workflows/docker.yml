@@ -105,6 +105,7 @@ jobs:
                 tags:[],
               },
               app:{
+                image:opt.dot.image,
                 name:opt.dot.name,
                 version:opt.dot.semver.version,
                 root:opt.dot.root,
