@@ -35,6 +35,8 @@ ARG APP_SUFFIX=""
     ENV PORT=3000
     ENV LOG_LEVEL=INFO
 
+    ENV PIP_ROOT_USER_ACTION=ignore
+
   # :: multi-stage
     COPY ./LICENSE /opt/py-kms
 
@@ -52,8 +54,8 @@ ARG APP_SUFFIX=""
       cd /opt/py-kms; \
       echo "${APP_VERSION}" > VERSION; \
       echo "master" >> VERSION; \
-      pip3 install --no-cache-dir -r /opt/py-kms/requirements.gui.txt --break-system-packages; \
-      pip3 list -o | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install -U --break-system-packages; \
+      pip3 install --no-cache-dir -r /opt/py-kms/requirements.gui.txt; \
+      pip3 list -o | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install --no-cache-dir -U; \
       apk del --no-network .build;
 
   # :: copy filesystem changes
