@@ -32,7 +32,7 @@ ARG APP_SUFFIX=""
     ENV PYKMS_SQLITE_DB_PATH=/kms/var/kms.db
     ENV PYKMS_LICENSE_PATH=/opt/py-kms/LICENSE
     ENV PYKMS_VERSION_PATH=/opt/py-kms/VERSION
-    ENV PORT=8080
+    ENV PORT=3000
     ENV LOG_LEVEL=INFO
 
   # :: multi-stage
