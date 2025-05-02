@@ -9,10 +9,11 @@ services:
     ports:
       - "1688:1688/tcp"
     restart: "always"
+
   gui:
     image: "11notes/kms-gui:465f4d1"
     depends_on:
-      kms:
+      app:
         condition: "service_healthy"
         restart: true
     environment:
@@ -22,5 +23,6 @@ services:
     ports:
       - "3000:3000/tcp"
     restart: "always"
+
 volumes:
   var:
