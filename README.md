@@ -1,24 +1,11 @@
 ![banner](https://github.com/11notes/defaults/blob/main/static/img/banner.png?raw=true)
 
-# ⛰️ kms-gui
-[<img src="https://img.shields.io/badge/github-source-blue?logo=github&color=040308">](https://github.com/11notes/docker-kms-gui)![size](https://img.shields.io/docker/image-size/11notes/kms-gui/465f4d1?color=0eb305)![version](https://img.shields.io/docker/v/11notes/kms-gui/465f4d1?color=eb7a09)![pulls](https://img.shields.io/docker/pulls/11notes/kms-gui?color=2b75d6)[<img src="https://img.shields.io/github/issues/11notes/docker-kms-gui?color=7842f5">](https://github.com/11notes/docker-kms-gui/issues)
+# KMS-GUI
+[<img src="https://img.shields.io/badge/github-source-blue?logo=github&color=040308">](https://github.com/11notes/docker-KMS-GUI)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![size](https://img.shields.io/docker/image-size/11notes/kms-gui/465f4d1?color=0eb305)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![version](https://img.shields.io/docker/v/11notes/kms-gui/465f4d1?color=eb7a09)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![pulls](https://img.shields.io/docker/pulls/11notes/kms-gui?color=2b75d6)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)[<img src="https://img.shields.io/github/issues/11notes/docker-KMS-GUI?color=7842f5">](https://github.com/11notes/docker-KMS-GUI/issues)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![swiss_made](https://img.shields.io/badge/Swiss_Made-FFFFFF?labelColor=FF0000&logo=data:image/svg%2bxml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0wIDBoMzJ2MzJoLTMyeiIgZmlsbD0iI2YwMCIvPjxwYXRoIGQ9Im0xMyA2aDZ2N2g3djZoLTd2N2gtNnYtN2gtN3YtNmg3eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==)
 
 Activate any version of Windows and Office, forever
 
-# MAIN TAGS 🏷️
-These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
-
-* [465f4d1](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1)
-* [stable](https://hub.docker.com/r/11notes/kms-gui/tags?name=stable)
-* [latest](https://hub.docker.com/r/11notes/kms-gui/tags?name=latest)
-* [465f4d1-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1-unraid)
-* [stable-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=stable-unraid)
-* [latest-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=latest-unraid)
-
-# UNRAID VERSION 🟠
-This image supports unraid by default. Simply add **-unraid** to any tag and the image will run as 99:100 instead of 1000:1000 causing no issues on unraid. Enjoy.
-
-![Web GUI](https://github.com/11notes/docker-kms-gui/blob/master/img/webGUICustomIcon.png?raw=true)
+![Web GUI](https://github.com/11notes/docker-KMS-GUI/blob/master/img/webGUICustomIcon.png?raw=true)
 
 # SYNOPSIS 📖
 **What can I do with this?** This image will run a web GUI for your [11notes/kms](https://hub.docker.com/r/11notes/kms) server.
@@ -27,9 +14,8 @@ This image supports unraid by default. Simply add **-unraid** to any tag and the
 ```yaml
 name: "kms"
 services:
-  kms:
-    image: "11notes/kms:stable"
-    container_name: "kms"
+  app:
+    image: "11notes/kms:465f4d1"
     environment:
       TZ: "Europe/Zurich"
     volumes:
@@ -37,20 +23,21 @@ services:
     ports:
       - "1688:1688/tcp"
     restart: "always"
-  kms-gui:
+
+  gui:
     image: "11notes/kms-gui:465f4d1"
     depends_on:
-      kms:
+      app:
         condition: "service_healthy"
         restart: true
-    container_name: "kms-gui"
     environment:
       TZ: "Europe/Zurich"
     volumes:
       - "var:/kms/var"
     ports:
-      - "8080:8080/tcp"
+      - "3000:3000/tcp"
     restart: "always"
+
 volumes:
   var:
 ```
@@ -70,8 +57,24 @@ volumes:
 | `DEBUG` | Will activate debug option for container image and app (if available) | |
 | `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon |
 
+# MAIN TAGS 🏷️
+These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
+
+* [465f4d1](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1)
+* [465f4d1-unraid](https://hub.docker.com/r/11notes/kms-gui/tags?name=465f4d1-unraid)
+
+# REGISTRIES ☁️
+```
+docker pull 11notes/kms-gui:465f4d1
+docker pull ghcr.io/11notes/kms-gui:465f4d1
+docker pull quay.io/11notes/kms-gui:465f4d1
+```
+
+${{ title_unraid }}
+This image supports unraid by default. Simply add **-unraid** to any tag and the image will run as 99:100 instead of 1000:1000 causing no issues on unraid. Enjoy.
+
 # SOURCE 💾
-* [11notes/kms-gui](https://github.com/11notes/docker-kms-gui)
+* [11notes/kms-gui](https://github.com/11notes/docker-KMS-GUI)
 
 # PARENT IMAGE 🏛️
 * [11notes/kms:465f4d1](https://hub.docker.com/r/11notes/kms)
@@ -79,12 +82,14 @@ volumes:
 # BUILT WITH 🧰
 * [py-kms](https://github.com/Py-KMS-Organization/py-kms)
 * [CustomIcon/pykms-frontend](https://github.com/CustomIcon/pykms-frontend)
+* [11notes/util](https://github.com/11notes/docker-util)
 
 # GENERAL TIPS 📌
-* Use a reverse proxy like Traefik, Nginx, HAproxy to terminate TLS and to protect your endpoints
-* Use Let’s Encrypt DNS-01 challenge to obtain valid SSL certificates for your services
+> [!TIP]
+>* Use a reverse proxy like Traefik, Nginx, HAproxy to terminate TLS and to protect your endpoints
+>* Use Let’s Encrypt DNS-01 challenge to obtain valid SSL certificates for your services
 
 # ElevenNotes™️
 This image is provided to you at your own risk. Always make backups before updating an image to a different version. Check the [releases](https://github.com/11notes/docker-kms-gui/releases) for breaking changes. If you have any problems with using this image simply raise an [issue](https://github.com/11notes/docker-kms-gui/issues), thanks. If you have a question or inputs please create a new [discussion](https://github.com/11notes/docker-kms-gui/discussions) instead of an issue. You can find all my other repositories on [github](https://github.com/11notes?tab=repositories).
 
-*created 10.3.2025, 12:02:37 (CET)*
+*created 02.05.2025, 10:23:31 (CET)*
