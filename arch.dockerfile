@@ -1,6 +1,8 @@
 ARG APP_VERSION=stable
 ARG APP_PREFIX=""
 ARG APP_SUFFIX=""
+ARG APP_UID=1000
+ARG APP_GID=1000
 
 # :: Build / styles
   FROM alpine/git AS styles
@@ -84,4 +86,4 @@ ARG APP_SUFFIX=""
   HEALTHCHECK --interval=5s --timeout=2s CMD curl -X GET -kILs --fail http://localhost:${PORT}/livez || exit 1
 
 # :: Start
-  USER docker
+  USER ${APP_UID}:${APP_GID}
