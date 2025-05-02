@@ -53,6 +53,7 @@ ARG APP_SUFFIX=""
       echo "${APP_VERSION}" > VERSION; \
       echo "master" >> VERSION; \
       pip3 install --no-cache-dir -r /opt/py-kms/requirements.gui.txt --break-system-packages; \
+      pip3 list -o | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install -U --break-system-packages; \
       apk del --no-network .build;
 
   # :: copy filesystem changes
