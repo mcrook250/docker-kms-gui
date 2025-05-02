@@ -58,7 +58,8 @@ ARG APP_GID=1000
       echo "master" >> VERSION; \
       pip3 install --no-cache-dir --break-system-packages -r /opt/py-kms/requirements.gui.txt; \
       pip3 list -o | sed 's/pip.*//' | grep . | cut -f1 -d' ' | tr " " "\n" | awk '{if(NR>=3)print}' | cut -d' ' -f1 | xargs -n1 pip3 install --no-cache-dir --break-system-packages -U; \
-      apk del --no-network .build;
+      apk del --no-network .build; \
+      rm -rf /usr/lib/python3.12/site-packages/pip;
 
   # :: copy filesystem changes
     COPY ./rootfs /      
