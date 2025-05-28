@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block title %} - Products{% endblock %}
+
+{% block style %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+            <!-- Sale & Revenue Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-list-check fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Products</p>
+                                <h6 class="mb-0">{{ count_products + filtered }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fab fa-windows fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Windows</p>
+                                <h6 class="mb-0">{{ count_products_windows }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-paperclip fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Office</p>
+                                <h6 class="mb-0">{{ count_products_office }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-square-binary fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Other</p>
+                                <h6 class="mb-0">{{ filtered }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sale & Revenue End -->
+
+
+
+ <!-- Products Table -->
+<!-- Table Start -->
+<div class="container-fluid pt-4 px-4">
+  <div class="row g-4">
+    <div class="col-12">
+      <div class="bg-secondary rounded h-100 p-4">
+        <h6 class="mb-4 text-white">Supported Products</h6>
+        <div class="table-responsive">
+          <table class="table">
+            {% for name, gvlk in products | dictsort %}
+              {% if gvlk is not none %}
+                {% if gvlk is mapping %}
+                  <!-- Categories -->
+                  <tbody class="category-group">
+                    <tr class="bg-gray-800 cursor-pointer" onclick="toggleCategory(this)">
+                      <td colspan="2" class="px-6 py-3">
+                        <span class="text-sm font-semibold text-white">{{ name }}</span>
+                        <svg class="inline w-4 h-4 ml-2 transform transition-transform duration-200 text-white" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 011.08 1.04l-4.25 4.25a.75.75 0 01-1.08 0L5.25 8.27a.75.75 0 01-.02-1.06z" clip-rule="evenodd" />
+                        </svg>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <!-- Sub-items -->
+                  <tbody class="sub-items">
+                    <tr>
+                      <td colspan="2" class="p-0 border-0">
+                        <div class="collapsible" id="collapse-{{ loop.index }}" style="max-height: 0;">
+                          <table class="min-w-full">
+                            <tbody>
+                              {% for sub_name, sub_gvlk in gvlk.items() %}
+                                <tr class="hover:bg-gray-700">
+                                  <td class="px-6 py-4 text-sm text-white pl-8">
+                                    <span class="ml-2">{{ sub_name }}</span>
+                                  </td>
+                                  <td class="px-6 py-4 text-sm font-mono text-white">
+                                    {% if sub_gvlk %}
+                                      <pre class="copyable inline-block bg-gray-800 text-white px-3 py-2 rounded-lg">{{ sub_gvlk }}</pre>
+                                    {% else %}
+                                      <span class="text-gray-400 italic">N/A</span>
+                                    {% endif %}
+                                  </td>
+                                </tr>
+                              {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                {% else %}
+                  <!-- Single Product -->
+                  <tbody>
+                    <tr class="hover:bg-gray-700">
+                      <td class="px-6 py-4 text-sm text-white font-medium">{{ name }}</td>
+                      <td class="px-6 py-4 text-sm font-mono text-white">
+                        {% if gvlk %}
+                          <pre class="copyable inline-block bg-gray-800 text-white px-3 py-2 rounded-lg">{{ gvlk }}</pre>
+                        {% else %}
+                          <span class="text-gray-400 italic">N/A</span>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  </tbody>
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Table End -->
+
+<script>
+  function toggleCategory(header) {
+    var categoryTbody = header.closest('tbody');
+    var subItemsTbody = categoryTbody.nextElementSibling;
+    if (subItemsTbody && subItemsTbody.classList.contains('sub-items')) {
+      var collapseDiv = subItemsTbody.querySelector('.collapsible');
+      if (collapseDiv) {
+        if (collapseDiv.style.maxHeight && collapseDiv.style.maxHeight !== "0px") {
+          collapseDiv.style.maxHeight = "0";
+        } else {
+          collapseDiv.style.maxHeight = collapseDiv.scrollHeight + "px";
+        }
+      }
+      // Rotate icon
+      var svg = header.querySelector('svg');
+      if (svg) {
+        svg.classList.toggle('rotate-180');
+      }
+    }
+  }
+
+  // Copy-to-clipboard
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.copyable').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var text = el.innerText.trim();
+        navigator.clipboard.writeText(text)
+          .then(function() {
+            console.log('Copied: ' + text);
+            el.style.backgroundColor = '#243252';
+            setTimeout(function() {
+              el.style.backgroundColor = '';
+            }, 1000);
+          })
+          .catch(function(err) {
+            console.error('Failed to copy: ', err);
+          });
+      });
+    });
+  });
+</script>
+{% endblock %}

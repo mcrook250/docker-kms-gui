@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+
+{% block title %} - Status{% endblock %}
+
+{% block style %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+            <!-- start page visits, start time, sys health and branch info -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-2">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Visits</p>
+                                <h6 class="mb-0">{{ get_serve_count() }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-4">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-clock-rotate-left fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Start Time</p>
+                                <h6 class="mb-0"><span class="text-xs">{{ start_time.strftime('%Y-%m-%d') }} @
+                                  {{ start_time.strftime('%H:%M:%S') }}</span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-heart-pulse fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">System Health</p>{% if rpc_health == true %}
+                                <h6 class="mb-0 text-success">Healthy!{% else %}
+                                <h6 class="mb-0 text-warning">Unhealthy{% endif %}
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-code-branch fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Branch Version</p>
+                                <h6 class="mb-0">{{ version_info['branch'] }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- page visits, start time, sys health and branch info End -->
+
+            <!-- server uptime and hashed server version Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-6">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i id="hourglass" class="fa-solid fa-hourglass-start hourglass fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Server Uptime</p>
+                                <h6 class="mb-0" id="clock">Calculating Uptime...</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-6">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-brands fa-github fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Server Version (hashed)</p>
+                                <h6 class="mb-0">v{{ version_info['hash'] }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- server uptime and hashed server version End -->
+
+
+<script>
+
+/*
+Count down until any date script-
+By JavaScript Kit (www.javascriptkit.com)
+Over 200+ free scripts here!
+*/
+
+
+    // Clock Code: Count up from July 12, 2019 when swiftsure electric closed
+    const deathDate = new Date('{{ start_time }}');
+    function updateClock() {
+      const now = new Date();
+      const diff = now - deathDate;  // Difference in milliseconds
+      
+      // Calculate time components
+      let seconds = Math.floor(diff / 1000);
+      const days = Math.floor(seconds / (3600 * 24));
+      seconds %= (3600 * 24);
+      const hours = Math.floor(seconds / 3600);
+      seconds %= 3600;
+      const minutes = Math.floor(seconds / 60);
+      seconds %= 60;
+      
+      // Update the clock element
+      const clockElement = document.getElementById('clock');
+      clockElement.innerHTML = 
+        days + ' days, ' + hours + ' hours, ' + minutes + ' minutes, ' + seconds + ' seconds';
+    }
+    
+    setInterval(updateClock, 1000);
+    updateClock(); // initial call immediately
+
+    // countdown(2019,07,12)
+</script>
+
+<script>
+// Wait for the DOM to load
+document.addEventListener('DOMContentLoaded', function () {
+  // Inject some CSS for the animation and styling.
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes flip {
+      0% { transform: rotate(0deg); }
+      50% { transform: rotate(90deg); }
+      100% { transform: rotate(180deg); }
+    }
+    .flip-animation {
+      animation: flip 2s linear;
+    }
+    .hourglass {
+      font-size: 48px; /* Adjust size as needed */
+      display: inline-block;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // If you already have an element in your HTML, for example:
+  // <i id="hourglass" class="fa-solid fa-hourglass-start hourglass"></i>
+  // then comment out the next block.
+  let hourglass = document.getElementById('hourglass');
+  if (!hourglass) {
+    hourglass = document.createElement('i');
+    hourglass.id = 'hourglass';
+    // Start with the top-filled hourglass icon (sand in the top chamber)
+    hourglass.className = "fa-solid fa-hourglass-start hourglass";
+    document.body.appendChild(hourglass);
+  }
+
+  // Sequence of icons that simulate the flow of sand:
+  //   1. fa-hourglass-start → Top is full
+  //   2. fa-hourglass-half  → In between—sand mid-flight
+  //   3. fa-hourglass-end   → Bottom is full (time is up)
+  //   4. (Optional: Back to half to simulate a reset flip.)
+  const icons = [
+    "fa-hourglass-start",
+    "fa-hourglass-half",
+    "fa-hourglass-end",
+    "fa-hourglass-half"
+  ];
+  let index = 0;
+
+  // Update the icon every 3 seconds.
+  setInterval(function () {
+    // Remove any previous hourglass icon class.
+    hourglass.classList.remove("fa-hourglass-start", "fa-hourglass-half", "fa-hourglass-end");
+
+    // Set the next state of the hourglass.
+    hourglass.classList.add(icons[index]);
+
+    // Trigger the flip animation.
+    // (Remove and re-add the class so that the animation restarts.)
+    hourglass.classList.remove('flip-animation');
+    // Force a reflow to restart the animation. This is a common trick.
+    void hourglass.offsetWidth;
+    hourglass.classList.add('flip-animation');
+
+    // Increment index for the next cycle.
+    index = (index + 1) % icons.length;
+  }, 9000);
+});
+</script>
+              
+{% endblock %}

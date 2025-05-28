@@ -1,87 +1,129 @@
 {% extends 'base.html' %}
 
-{% block title %}clients{% endblock %}
+{% block title %} - Clients{% endblock %}
 
 {% block style %}
-th {
-    white-space: nowrap;
-}
+{{ super() }}
 {% endblock %}
 
 {% block content %}
-{% if error %}
-<article class="message is-danger">
-    <div class="message-header">
-        Whoops! Something went wrong...
-    </div>
-    <div class="message-body">
-        {{ error }}
-    </div>
-</article>
-{% else %}
-<nav class="level">
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Clients</p>
-            <p class="title">{{ count_clients }}</p>
-        </div>
-    </div>
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Windows</p>
-            <p class="title">{{ count_clients_windows }}</p>
-        </div>
-    </div>
-    <div class="level-item has-text-centered">
-        <div>
-            <p class="heading">Office</p>
-            <p class="title">{{ count_clients_office }}</p>
-        </div>
-    </div>
-</nav>
+            <!-- Info and stats bar start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-computer fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Clients</p>
+                                <h6 class="mb-0">{{ count_clients }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fab fa-windows fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Windows Clients</p>
+                                <h6 class="mb-0">{{ count_clients_windows }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-paperclip fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Office Clients</p>
+                                <h6 class="mb-0">{{ count_clients_office }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-database fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Products</p>
+                                <h6 class="mb-0">{{ count_projects }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- info and status bar End -->
 
-<hr>
 
-{% if clients %}
-<table class="table is-striped is-hoverable is-fullwidth">
-    <thead>
-        <tr>
-            <th>Client ID</th>
-            <th>Machine Name</th>
-            <th>Machine IP</th>
-            <th>Application ID</th>
-            <th><abbr title="Stock Keeping Unit">SKU</abbr> ID</th>
-            <th>License Status</th>
-            <th>Last Seen</th>
-            <th>KMS <abbr title="Enhanced Privacy ID">EPID</abbr></th>
-            <th>Seen Count</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for client in clients %}
-        <tr>
-            <th><pre class="clientMachineId">{{ client.clientMachineId }}</pre></th>
-            <td class="machineName">{{ client.machineName }}</td>
-            <td>{{ client.machineIp }}</td>
-            <td>{{ client.applicationId }}</td>
-            <td>{{ client.skuId }}</td>
-            <td>{{ client.licenseStatus }}</td>
-            <td class="convert_timestamp">{{ client.lastRequestTime }}</td>
-            <td>{{ client.kmsEpid }}</td>
-            <td>{{ client.requestCount }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<article class="message is-warning">
-    <div class="message-header">
-        <p>Whoops?</p>
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+
+                    <div class="col-12">
+                        <div class="bg-secondary rounded h-100 p-4">
+                            <h6 class="mb-4">KMS Clients</h6>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Client ID</th>
+                                            <th scope="col">Machine</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Count</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+					{% for client in (clients or []) %}
+                                        <tr>
+                                            <th scope="row" class="text-gray-500 dark:text-gray-100 text-sm">{{ client.clientMachineId }}</th>
+                                            <td>
+                                             <div>
+                                              <div class="text-gray-500 dark:text-gray-100 text-sm">{{ client.machineName }}</div>
+                                               <div class="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                                 Last IP: <span>{{ client.machineIp }}</span>
+                                               </div>
+                                                <div class="text-gray-500 dark:text-gray-400 text-xs mt-1">
+                                                Last active: <span class="convert_timestamp">{{ client.lastRequestTime }}</span>
+                                              </div>
+                                             </div>
+					                        </td>
+                                            <td><span class="btn btn-sm {% if client.licenseStatus == 'Activated' %}btn-outline-success{% elif client.licenseStatus == 'Notifications Mode' %}
+                                              btn-outline-warning{% else %} btn-outline-danger{% endif %} m-2 dropdown-toggle" data-bs-toggle="dropdown">
+                            			{% if client.licenseStatus == 'Notifications Mode' %}
+                                			Notify
+                            			{% else %}
+                                		{{ client.licenseStatus }}
+                            			{% endif %}						
+					                           </span>
+                                              <div class="dropdown-menu dropdown-menu-end bg-white border-0 rounded-20 rounded-bottom m-0">
+                                                <div class="dropdown-item text-gray-500 dark:text-gray-100 text-sm"><b> APP:</b> {{ client.applicationId }}</div>
+                                                <div class="dropdown-item text-gray-500 dark:text-gray-100 text-sm"><b>EPID:</b> {{ client.kmsEpid | default('N/A', true) }}</div>
+                                                <div class="dropdown-item text-gray-500 dark:text-gray-100 text-sm"><b>PROD:</b> {{ client.skuId }}</div>
+                                              </div>
+					                          </td>
+                                            <td class="text-gray-500 dark:text-gray-100 text-sm">{{ client.requestCount }}</td>
+                                        </tr>
+					{% endfor %}
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+
+    <!-- Empty State -->
+    {% if not clients %}
+    <div class="container-fluid pt-4 px-4 text-center">
+        <div class="max-w-md mx-auto">
+            <svg class="mx-auto h-12 w-12 text-yellow-500 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <h3 class="mt-4 text-xl font-medium text-yellow-800 dark:text-yellow-200">No activations found yet!</h3>
+            <p class="mt-2 text-yellow-700 dark:text-yellow-300">Connect KMS clients to see activation data</p>
+        </div>
     </div>
-    <div class="message-body">
-        This page seems to be empty, because no clients are available. Try to use the server with a compartible client to add it to the database.
-    </div>
-</article>
-{% endif %}
-{% endif %}
+    {% endif %}
+
+
 {% endblock %}

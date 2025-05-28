@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} - License{% endblock %}
+
+{% block content %}
+
+            <div class="container-fluid pt-4 px-4">
+              <h6 class="text-3xl font-bold text-white mb-8">Software License</h6>
+                <div class="row vh-100 bg-secondary rounded align-items-center justify-content-center mx-0">
+                    <div class="col-md-12 text-center">
+                        <h6><pre class="p-6 text-gray-300 overflow-auto max-h-[70vh]">{{ license }}</pre></h6>
+                    </div>
+                </div>
+            </div>
+
+{% endblock %}
