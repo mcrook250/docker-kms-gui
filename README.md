@@ -10,7 +10,7 @@ Activate any version of Windows and Office, forever
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash1.jpg?raw=true)
 
 # SYNOPSIS 📖
-**What can I do with this?** This image will run a web GUI for your [11notes/kms](https://hub.docker.com/r/11notes/kms) server. Why was this created? Because the upstream loser 11notes likes to leave breaking bugs in his code, this one here "Error 0x2a 0x80070216" has been fixed in this release and a new UI with tons of new features!
+**What can I do with this?** This image will run a web GUI for your [mcrook250/ms-kms](https://hub.docker.com/r/mcrook250/ms-kms) server. Why was this created? Because the upstream loser 11notes likes to leave breaking bugs in his code, this one here "Error 0x2a 0x80070216" has been fixed in this release and a new UI with tons of new features!
 
 # COMPOSE ✂️
 ```yaml
