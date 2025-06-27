@@ -13,7 +13,7 @@
                 <div class="row g-4">
                     <div class="col-sm-6 col-xl-2">
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
-                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <i class="fa-solid fa-arrow-trend-up fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Visits</p>
                                 <h6 class="mb-0">{{ get_serve_count() }}</h6>
@@ -78,6 +78,65 @@
                 </div>
             </div>
             <!-- server uptime and hashed server version End -->
+
+            <!-- New & other stuff being added start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-chart-line fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Visits</p>
+                                <h6 class="mb-0">{{ get_total_serv_count() }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-globe fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Time Zone</p>
+                                <h6 class="mb-0">{{ tz_info }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa-solid fa-memory fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Memory Usage</p>
+                                <h6 class="mb-0">{{ mem_use }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                          {% if os_info == "Linux" and os_distro == "ubuntu" %}
+                            <i class="fa-brands fa-ubuntu fa-3x text-primary"></i>
+                          {% elif os_info == "Linux" and os_distro == "redhat" %}
+                            <i class="fa-brands fa-redhat fa-3x text-primary"></i>
+                          {% elif os_info == "Linux" and os_distro == "cedora" %}
+                            <i class="fa-brands fa-fedora fa-3x text-primary"></i>
+                          {% elif os_info == "Linux" and os_distro == "centos" %}
+                            <i class="fa-brands fa-centos fa-3x text-primary"></i>
+                          {% elif os_info == "Linux" and os_distro == "alpine" %}
+                            <i class="fa-brands fa-linux fa-3x text-primary"></i>
+                          {% elif os_info == "Linux" %}
+                            <i class="fa-brands fa-linux fa-3x text-primary"></i>
+                          {% elif os_info == "Windows" %}
+                            <i class="fa-brands fa-windows fa-3x text-primary"></i>
+                          {% else %}
+                            <i class="fa-brands fa-ioxhost fa-3x text-primary"></i>
+                          {% endif %}
+                            <div class="ms-3">
+                                <p class="mb-2">OS System</p>
+                                <h6 class="mb-0">{{ os_info }}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- new & other stuff being added End -->
 
 
 <script>

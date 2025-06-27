@@ -70,6 +70,20 @@
                 <a href="#" class="sidebar-toggler flex-shrink-0">
                     <i class="fa fa-bars"></i>
                 </a>
+              
+              <!-- purge service indicator -->
+              
+                <div class="d-none d-md-flex ms-4 align-items-center">
+                  {% if auto_purge %}
+                     <i class="fa-solid fa-wand-sparkles text-success"></i>
+                     <small class="ms-2">Auto-Purge is ON</small>
+                  {% else %}
+                     <i class="fa-solid fa-wand-sparkles text-warning"></i>
+                     <small class="ms-2">Auto-Purge is OFF</small>
+                  {% endif %}
+                </div>
+              
+              
                 <div class="navbar-nav align-items-center ms-auto">
                     
                 <div class="d-flex align-items-center ms-4">
@@ -79,8 +93,7 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">MS KMS Service</h6>
-                        <span class="text-info">{% if rev_version >= gui_version or rev_version >= version_info['hash'] %}<a href="https://github.com/mcrook250/ms-kms/releases" class="text-warning">Update Available</a>{% else %}
-                        Up to date!</span>{% endif %}
+                      <span class="text-info"><div id="ticker">Loading...</div></span>
                     </div>
                 </div>
       
@@ -128,10 +141,36 @@
 
     <!-- Template Javascript -->
     <script src="{{ url_for('static', filename= 'js/main.js') }}"></script>
+  
+  
+    <script>
+    // Array storing the texts you want to switch between.
+    {% if rev_version >= gui_version or rev_version >= version_info['hash'] %}
+    const texts = ['<a href="https://github.com/mcrook250/ms-kms/releases" class="text-warning">New Update</a>', "{{ rev_version }}"];
+    {% else %}
+    const texts = ['Up to Date!', "{{ rev_version }}"];
+    {% endif %}
+    
+   let index = 0;
+    const ticker = document.getElementById('ticker');
+
+    // Use innerHTML so the HTML content is rendered (not escaped)
+    function updateText() {
+      ticker.innerHTML = texts[index];
+      index = (index + 1) % texts.length;
+    }
+    
+    // Initial display and set interval
+    updateText();
+    setInterval(updateText, 10000);
+  </script>
+
+  
     <script>
         document.querySelectorAll('.convert_timestamp').forEach(el => {
             el.textContent = new Date(el.textContent).toLocaleString();
         });
     </script>
+  
 </body>
 </html>
