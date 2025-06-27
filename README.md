@@ -10,6 +10,7 @@ Activate any version of Windows and Office, forever
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash1.jpg?raw=true)
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash2.jpg?raw=true)
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash3.jpg?raw=true)
+![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-auto-purge.jpg?raw=true)
 
 
 # SYNOPSIS 📖
@@ -23,6 +24,7 @@ services:
     image: "mcrook250/ms-kms:latest"
     environment:
       TZ: "Canada/Mountain"
+      AUTO_PURGE: "True"
     volumes:
       - "var:/kms/var"
     ports:
@@ -36,6 +38,7 @@ services:
         condition: "service_healthy"
         restart: true
     environment:
+      ENABLE_DEL: "False"
       TZ: "Canada/Mountain"
     volumes:
       - "var:/kms/var"
