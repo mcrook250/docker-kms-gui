@@ -3,7 +3,7 @@
 ### THIS IS A WORK IN PROGRESS ###
 
 # KMS-GUI
-[<img src="https://img.shields.io/badge/github-source-blue?logo=github&color=040308">](https://github.com/11notes/docker-KMS-GUI)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![size](https://img.shields.io/docker/image-size/mcrook250/kms-gui/latest?color=0eb305)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![version](https://img.shields.io/docker/v/mcrook250/kms-gui/latest?color=eb7a09)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![pulls](https://img.shields.io/docker/pulls/mcrook250/kms-gui?color=2b75d6)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)[<img src="https://img.shields.io/github/issues/mcrook250/docker-KMS-GUI?color=7842f5">](https://github.com/mcrook250/docker-KMS-GUI/issues)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![swiss_made](https://img.shields.io/badge/Swiss_Made-FFFFFF?labelColor=FF0000&logo=data:image/svg%2bxml;base64,PHN2ZyB2ZXJzaW9uPSIxIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgdmlld0JveD0iMCAwIDMyIDMyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Im0wIDBoMzJ2MzJoLTMyeiIgZmlsbD0iI2YwMCIvPjxwYXRoIGQ9Im0xMyA2aDZ2N2g3djZoLTd2N2gtNnYtN2gtN3YtNmg3eiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==)
+[<img src="https://img.shields.io/badge/github-source-blue?logo=github&color=040308">](https://github.com/mcrook250/docker-KMS-GUI)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![size](https://img.shields.io/docker/image-size/mcrook250/kms-gui/latest?color=0eb305)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![version](https://img.shields.io/docker/v/mcrook250/kms-gui/latest?color=eb7a09)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![pulls](https://img.shields.io/docker/pulls/mcrook250/kms-gui?color=2b75d6)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)[<img src="https://img.shields.io/github/issues/mcrook250/docker-KMS-GUI?color=7842f5">](https://github.com/mcrook250/docker-KMS-GUI/issues)![5px](https://github.com/11notes/defaults/blob/main/static/img/transparent5x2px.png?raw=true)![swiss_made](https://img.shields.io/badge/Made_in_Canada-FFFFFF?labelColor=FFBBBB&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAMCAMAAAC+5dbKAAAAOVBMVEXfYVj++/vVKx7////gYFbrmZLtpaDeWU788vH5393vrqnrm5XpkYvlfnbhZl3aRDjWLiLzxcHql5HXmJcOAAAAAnRSTlP5/XDhGW0AAABXSURBVBjTbc1LDoAwCATQiqX03+r9D2sLJibgLIbkLRgHO+78IiLtWW5urzwhYPrxuG40HhoOGNiC8gKSory+XvX/PNedwe52Iupmd+fitp6NO5aDW+QBA2oDkd/yfEsAAAAASUVORK5CYII=)
 
 Activate any version of Windows and Office, forever
 
@@ -71,8 +71,10 @@ volumes:
 | --- | --- | --- |
 | `TZ` | [Time Zone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) | |
 | `DEBUG` | Will activate debug option for container image and app (if available) | |
-| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon) | custom-icon |
+| `KMS_GUI_STYLE` | switch the UI style of the webinterface (py-kms, custom-icon, MSUI) | MSUI |
 | `ENABLE_DEL` | enables the delete function in the webUI | False |
+
+** The KMS_GUI_STYLE is locked for now as I build more themes and include the originals
 
 # MAIN TAGS 🏷️
 These are the main tags for the image. There is also a tag for each commit and its shorthand sha256 value.
