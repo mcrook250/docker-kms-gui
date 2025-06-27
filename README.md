@@ -10,7 +10,15 @@ Activate any version of Windows and Office, forever
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash1.jpg?raw=true)
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash2.jpg?raw=true)
 ![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-dash3.jpg?raw=true)
-![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-auto-purge.jpg?raw=true)
+
+
+
+### NEW FEATURES
+##### kms-auto-purge service
+![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-auto-purge.png?raw=true)
+
+##### kms delete button
+![Web GUI](https://github.com/mcrook250/docker-KMS-GUI/blob/master/img/kms-delete.png?raw=true)
 
 
 # SYNOPSIS 📖
